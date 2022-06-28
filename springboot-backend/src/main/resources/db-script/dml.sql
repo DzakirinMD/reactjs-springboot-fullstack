@@ -1,1 +1,2 @@
-select * from accounts;
+drop table accounts ;
+commit;
