@@ -4,12 +4,6 @@ Account Management Applications using ReactJS and Spring Boot.
 
 Simple full stack web application for managing accounts in a company.
 
-<h3>Features:</h3>
-* Create Account
-* List Account
-* Update Account
-* Delete Account
-
 <h3>Tech Stack:</h3>
 * Front-End: ReactJS 
 * ReactJS Lib: Axios, react-router-dom v6
