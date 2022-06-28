@@ -8,6 +8,10 @@ class AccountService {
         return axios.get(ACCOUNTS_API_BASE_URL);
     }
 
+    createAccount(account) {
+        return axios.post(ACCOUNTS_API_BASE_URL, account);
+    }
+
 }
 
 export default new AccountService()

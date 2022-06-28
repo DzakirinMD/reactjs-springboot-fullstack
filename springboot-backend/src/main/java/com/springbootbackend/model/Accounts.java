@@ -7,7 +7,15 @@ import javax.persistence.*;
 public class Accounts {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(
+            name = "accounts_sequence",
+            sequenceName = "accounts_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "accounts_sequence"
+    )
     private Long id;
 
     @Column(name = "account_name")
