@@ -1,8 +1,8 @@
 # reactjs-springboot-fullstack
 
-<p>Account Management Applications using ReactJS and Spring Boot.
+Account Management Applications using ReactJS and Spring Boot.
 
-Simple full stack web application for managing accounts in a company.</p>
+Simple full stack web application for managing accounts in a company.
 
 <h3>Features:</h3>
 * Create Account
