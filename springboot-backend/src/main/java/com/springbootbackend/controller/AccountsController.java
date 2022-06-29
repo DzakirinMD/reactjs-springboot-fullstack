@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -55,4 +57,17 @@ public class AccountsController {
 
     }
 
+    // Delete accounts
+    @DeleteMapping("/accounts/{id}")
+    public ResponseEntity<Map<String, Boolean>> deleteAccounts(@PathVariable Long id){
+        Accounts accounts = accountsRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Account not exist with id : " + id));
+
+        accountsRepository.delete(accounts);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("delete", Boolean.TRUE);
+
+        return ResponseEntity.ok(response);
+    }
 }
