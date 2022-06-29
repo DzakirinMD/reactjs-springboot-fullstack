@@ -23,10 +23,15 @@ public class AccountsController {
         return accountsRepository.findAll();
     }
 
+    // Create accounts
+    @PostMapping("/accounts")
+    public Accounts createAccount(@RequestBody Accounts accounts) {
+        return accountsRepository.save(accounts);
+    }
+
     // Get accounts by id
     @GetMapping("/accounts/{id}")
     public ResponseEntity<Accounts> getAccountsById(@PathVariable Long id){
-
         Accounts accounts = accountsRepository
                 .findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not exist with id : " + id));
@@ -34,9 +39,20 @@ public class AccountsController {
         return ResponseEntity.ok(accounts);
     }
 
-    // Create accounts
-    @PostMapping("/accounts")
-    public Accounts createAccount(@RequestBody Accounts accounts) {
-        return accountsRepository.save(accounts);
+    // Update accounts
+    @PutMapping("/accounts/{id}")
+    public ResponseEntity<Accounts> updateAccounts(@PathVariable Long id, @RequestBody Accounts accountDetails){
+        Accounts accounts = accountsRepository
+                .findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Account not exist with id : " + id));
+
+        accounts.setAcctName(accountDetails.getAcctName());
+        accounts.setEmailId(accountDetails.getEmailId());
+
+        Accounts updatedAccounts = accountsRepository.save(accounts);
+
+        return ResponseEntity.ok(updatedAccounts);
+
     }
+
 }
