@@ -25,7 +25,7 @@ class CreateAccountsComponent extends Component {
             AccountsService.getAccountById(this.state.id).then( (res) =>{
                 let account = res.data;
                 this.setState({
-                    acctName: account.lastName,
+                    acctName: account.acctName,
                     emailId : account.emailId
                 });
             });
