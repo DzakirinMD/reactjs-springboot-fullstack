@@ -5,6 +5,7 @@ Account Management Applications using ReactJS and Spring Boot.
 Simple full stack web application for managing accounts in a company.
 
 <h3>Tech Stack:</h3>
+
 1. Front-End: ReactJS v16.13.1 
 2. Axios: v0.27.2 
 3. react-router-dom: v5.3.3 
