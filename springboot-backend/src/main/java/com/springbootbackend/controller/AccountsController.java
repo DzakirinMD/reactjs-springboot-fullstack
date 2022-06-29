@@ -68,6 +68,7 @@ public class AccountsController {
         Map<String, Boolean> response = new HashMap<>();
         response.put("delete", Boolean.TRUE);
 
+        // Must make map because if u see the .delete() method in repository. it is a void method. not returning anything
         return ResponseEntity.ok(response);
     }
 }
