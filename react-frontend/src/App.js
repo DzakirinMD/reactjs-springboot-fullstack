@@ -5,7 +5,7 @@ import ListAccountsComponent from './components/ListAccountsComponent';
 import HeaderComponent from './components/HeaderComponent';
 import FooterComponent from './components/FooterComponent';
 import CreateAccountsComponent from './components/CreateAccountsComponent';
-import UpdateAccountsComponents from './components/UpdateAccountsComponents';
+// import UpdateAccountsComponents from './components/UpdateAccountsComponents';
 import ViewEmployeeComponent from './components/ViewEmployeeComponent';
 
 function App() {
@@ -17,9 +17,11 @@ function App() {
                     <Switch> 
                           <Route path = "/" exact component = {ListAccountsComponent}></Route>
                           <Route path = "/accounts" component = {ListAccountsComponent}></Route>
-                          <Route path = "/create-accounts" component = {CreateAccountsComponent}></Route>
-                          <Route path = "/update-account/:id" component = {UpdateAccountsComponents}></Route>
+                          <Route path = "/create-accounts/:id" component = {CreateAccountsComponent}></Route>
                           <Route path = "/view-account/:id" component = {ViewEmployeeComponent}></Route>
+                          {/* Create and Update is no longer being use since the create and update can be combine into single component */}
+                          {/* <Route path = "/create-accounts" component = {CreateAccountsComponent}></Route> */}
+                          {/* <Route path = "/update-account/:id" component = {UpdateAccountsComponents}></Route> */}  
                     </Switch>
                 </div>
               <FooterComponent />

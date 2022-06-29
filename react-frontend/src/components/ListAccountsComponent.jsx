@@ -13,28 +13,28 @@ class ListAccountsComponent extends Component {
         this.deleteAccount = this.deleteAccount.bind(this);
     }
 
-    addAccount(){
-        this.props.history.push('/create-accounts');
-    }
-    viewAccount(id){
-        this.props.history.push(`/view-account/${id}`);
-    }
-    updateAccount(id){
-        this.props.history.push(`/update-account/${id}`);
-    }
-    deleteAccount(id){
-        AccountsService.deleteAccount(id).then( res => {
-            this.setState({accounts: this.state.accounts.filter(account => account.id !== id)});
-        });
-    }
-
     componentDidMount(){
         AccountsService.getAccounts().then((res) => {
             this.setState({ accounts: res.data});
         });
     }
 
-    
+
+    addAccount(){
+        this.props.history.push('/create-accounts/_add');
+    }
+    viewAccount(id){
+        this.props.history.push(`/view-account/${id}`);
+    }
+    updateAccount(id){
+        console.log("current id is => " + id);
+        this.props.history.push(`/create-accounts/${id}`);
+    }
+    deleteAccount(id){
+        AccountsService.deleteAccount(id).then( res => {
+            this.setState({accounts: this.state.accounts.filter(account => account.id !== id)});
+        });
+    }
 
     render() {
         return (
@@ -64,7 +64,7 @@ class ListAccountsComponent extends Component {
                                              <td> {account.acctName}</td>
                                              <td> {account.emailId}</td>
                                              <td>
-                                                 <button onClick={ () => this.updateAccount(account.id)} className="btn btn-info">Update </button>
+                                                 <button onClick={ () => this.updateAccount(account.id)} className="btn btn-info">Update</button>
                                                  <button style={{marginLeft: "10px"}} onClick={ () => this.deleteAccount(account.id)} className="btn btn-danger">Delete </button>
                                                  <button style={{marginLeft: "10px"}} onClick={ () => this.viewAccount(account.id)} className="btn btn-info">View </button>
                                              </td>

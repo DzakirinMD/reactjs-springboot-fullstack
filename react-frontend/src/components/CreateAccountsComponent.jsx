@@ -6,58 +6,49 @@ class CreateAccountsComponent extends Component {
         super(props)
 
         this.state = {
-            // id: this.props.match.params.id,
+            id: this.props.match.params.id,
             acctName: '',
             emailId: ''
         }
         // bind the function
         this.changeAccountNameHandler = this.changeAccountNameHandler.bind(this);
         this.changeEmailHandler = this.changeEmailHandler.bind(this);
-        this.createAccount = this.createAccount.bind(this);
-        // this.saveOrUpdateEmployee = this.saveOrUpdateEmployee.bind(this);
+        this.createorUpdateAccount = this.createorUpdateAccount.bind(this);
     }
 
-    // componentDidMount(){
-    //     if(this.state.id === '_add'){
-    //         return
-    //     }else{
-    //         AccountsService.getEmployeeById(this.state.id).then( (res) =>{
-    //             let employee = res.data;
-    //             this.setState({firstName: employee.firstName,
-    //                 lastName: employee.lastName,
-    //                 emailId : employee.emailId
-    //             });
-    //         });
-    //     }        
-    // }
-    createAccount = (e) => {
+    // get id for combining create and update page
+    componentDidMount(){
+        console.log("current state of id => " + this.state.id);
+        if(this.state.id === '_add'){
+            return
+        }else{
+            AccountsService.getAccountById(this.state.id).then( (res) =>{
+                let account = res.data;
+                this.setState({
+                    acctName: account.lastName,
+                    emailId : account.emailId
+                });
+            });
+        }        
+    }
+
+    createorUpdateAccount = (e) => {
         e.preventDefault();
-        
         let account = {
             acctName: this.state.acctName,
             emailId: this.state.emailId
         };
-
         console.log('account => ' + JSON.stringify(account));
 
-        // after create account navigate to list accounts page
-        AccountsService.createAccount(account).then(res => {
-            this.props.history.push('/accounts');
-        });
-        
-        // if(this.state.id === '_add'){
-        //     AccountsService.createAccount(account).then(res =>{
-        //         this.props.history.push('/accounts');
-        //     });
-        // }else{
-        //     AccountsService.updateEmployee(account, this.state.id).then( res => {
-        //         this.props.history.push('/accounts');
-        //     });
-        // }
-    }
-    
-    changeFirstNameHandler= (event) => {
-        this.setState({firstName: event.target.value});
+        if(this.state.id === '_add'){
+            AccountsService.createAccount(account).then(res =>{
+                this.props.history.push('/accounts');
+            });
+        }else{
+            AccountsService.updateAccount(account, this.state.id).then( res => {
+                this.props.history.push('/accounts');
+            });
+        }
     }
 
     changeAccountNameHandler = (event) => {
@@ -72,13 +63,14 @@ class CreateAccountsComponent extends Component {
         this.props.history.push('/accounts');
     }
 
-    // getTitle(){
-    //     if(this.state.id === '_add'){
-    //         return <h3 className="text-center">Add Employee</h3>
-    //     }else{
-    //         return <h3 className="text-center">Update Employee</h3>
-    //     }
-    // }
+    // _add is used as replacement for -1 to combine both create and update
+    getTitle(){
+        if(this.state.id === '_add'){
+            return <h3 className="text-center">Create Account</h3>
+        }else{
+            return <h3 className="text-center">Update Account</h3>
+        }
+    }
 
     render() {
         return (
@@ -87,10 +79,9 @@ class CreateAccountsComponent extends Component {
                    <div className = "container">
                         <div className = "row">
                             <div className = "card col-md-6 offset-md-3 offset-md-3">
-                                {/* {
+                                {
                                     this.getTitle()
-                                } */}
-                                <h3 className="text-center">Create Account</h3>
+                                }
                                 <div className = "card-body">
                                     <form>
                                         <div className = "form-group">
@@ -104,7 +95,7 @@ class CreateAccountsComponent extends Component {
                                                 value={this.state.emailId} onChange={this.changeEmailHandler}/>
                                         </div>
 
-                                        <button className="btn btn-success" onClick={this.createAccount}>Save</button>
+                                        <button className="btn btn-success" onClick={this.createorUpdateAccount}>Save</button>
                                         <button className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}>Cancel</button>
                                     </form>
                                 </div>
