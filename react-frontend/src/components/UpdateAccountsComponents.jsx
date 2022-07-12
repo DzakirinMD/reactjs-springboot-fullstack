@@ -26,7 +26,9 @@ class UpdateAccountsComponents extends Component {
         });
     }
 
+    // synthethic component
     updateAccount = (e) => {
+        // e.preventDefault(); will block the default onSubmit() behavior. so we can use our own proccessing, which call the PUT API
         e.preventDefault();
         let account = {
             acctName: this.state.acctName,
