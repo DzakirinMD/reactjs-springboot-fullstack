@@ -11,14 +11,14 @@ class ListAccountsComponent extends Component {
         this.addAccount = this.addAccount.bind(this);
         this.updateAccount = this.updateAccount.bind(this);
         this.deleteAccount = this.deleteAccount.bind(this);
+        this.viewAccount = this.viewAccount.bind(this);
     }
 
     componentDidMount(){
         AccountsService.getAccounts().then((res) => {
-            this.setState({ accounts: res.data});
+            this.setState({ accounts: res.data });
         });
     }
-
 
     addAccount(){
         this.props.history.push('/create-accounts/_add');
@@ -32,7 +32,9 @@ class ListAccountsComponent extends Component {
     }
     deleteAccount(id){
         AccountsService.deleteAccount(id).then( res => {
-            this.setState({accounts: this.state.accounts.filter(account => account.id !== id)});
+            this.setState({
+                accounts: this.state.accounts.filter(account => account.id !== id)
+            });
         });
     }
 
